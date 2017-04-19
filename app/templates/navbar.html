@@ -1,0 +1,31 @@
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">{{ title }}</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul id="myTabs" role="tablist" class="nav navbar-nav">
+            {% for item in nav_items %}
+              {% if loop.index == 1 %}
+            <li class="active"><a class="clickable" id="{{ item }}" href="#">{{ item }}</a></li>
+              {% else %}
+            <li><a class="clickable" id="{{ item }}" href="#{{ item }}">{{ item }}</a></li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+          <ul id="navright" class="nav navbar-nav navbar-right">
+          {% if not current_user.is_authenticated %}
+            <li><a class="clickable" id="login" href="#login">Login</a></li>
+          {% else %}
+            {% include 'loggedin.html' %}
+          {% endif %}
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>

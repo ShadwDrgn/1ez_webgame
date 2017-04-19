@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% include 'header.html' %}
+  <body>
+    {% include 'navbar.html' %}
+	<div id="chat" class="panel panel-default">
+	  <div class="panel-body">
+        <div class="panel panel-default">
+          <div id="chattext" class="panel-body">
+              Welcome back! Walls of text and here's a long chat
+          </div>
+        </div>
+	    <div id="chattext" class="pull-left"></div>
+      <form class="form form-group form-group-lg" style="margin-bottom: 0">
+      <div class="input-group">
+        <input type="text" name="chattext" class="form-control" placeholder="Say Something">
+        <span class="input-group-btn">
+          <input type="submit" class="btn btn-lg btn-info" value="Say">
+        </span>
+      </div><!-- /input-group -->
+      </form>
+	  </div>
+	</div>
+    <div id="content" class="container">
+    
+    </div><!-- /.container -->
+    {% include 'footer.html' %}
+    <div class="modal fade" id="bodyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    </div>
+  </body>
+</html>
