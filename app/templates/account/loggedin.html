@@ -4,9 +4,9 @@
                 <li><a id="logout" href="/logout">Logout</a></li>
                 <li><a id="settings" href="/settings">Settings</a></li>
                 <li role="separator" class="divider"></li>
-                {% if current_user.char_count >= 1 %}
+                {% if current_user.characters|length >= 1 %}
                 <li class="dropdown-header">Characters</li>
-                  {% for char in current_users.characters %}
+                  {% for char in current_user.characters %}
                     <li><a href="#">{{ char.name }}</a></li>
                   {% endfor %}
                 {% else %}

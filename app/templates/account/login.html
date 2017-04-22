@@ -6,14 +6,14 @@
       </div>
       <div class="modal-body">
          <form class="form" role="form" method="post" action="/login" accept-charset="UTF-8" id="login-nav">
-            {{ form.csrf_token }}
+            {{ login_user_form.hidden_tag() }}
             <div class="form-group">
-              <label class="sr-only" for="username">Username</label>
-              {{ form.username(class_="form-control")|safe }}
+              <label class="sr-only" for="email">Email</label>
+              {{ login_user_form.email(class_="form-control", placeholder="Username/Email")|safe }}
             </div>
             <div class="form-group">
                <label class="sr-only" for="password">Password</label>
-              {{ form.password(class_="form-control")|safe }}
+              {{ login_user_form.password(class_="form-control", placeholder="Password")|safe }}
                <div class="help-block text-left pull-left"><a id="register" href="">Register</a></div>
                <div class="help-block text-right pull-right"><a href="">Forgot the password ?</a></div>
             </div>
@@ -22,7 +22,7 @@
             </div>
             <div class="checkbox">
                <label class="navbar-color">
-               <input type="checkbox"> keep me logged-in
+               <input name="remember" type="checkbox"> keep me logged-in
                </label>
             </div>
          </form>

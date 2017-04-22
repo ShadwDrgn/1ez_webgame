@@ -13,7 +13,7 @@
         });
         $('#bodyModal').on('submit', '#login-nav', function(e){
           e.preventDefault();
-          process('post','/login',$(this).serialize());
+          process('post','/applogin',$(this).serialize());
           $('#bodyModal').modal('hide');
         });
         $('#bodyModal').on('submit', '#register-nav', function(e){
@@ -23,15 +23,15 @@
         });
         $('#bodyModal').on('click', '#register', function(e){
           e.preventDefault();
-          process('get','/signup');
+          process('get','/appregister');
         });
         $('#navright').on('click', '#login', function(e){
           e.preventDefault();
-          process('get', "/signin");
+          process('get', "/applogin");
         });
         $('#navright').on('click', '#logout', function(e){
           e.preventDefault();
-          process('get', '/logout');
+          process('get', '/applogout');
         });
         $('#navright').on('click', '#newchar', function(e){
           e.preventDefault();

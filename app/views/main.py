@@ -1,5 +1,4 @@
-from flask import render_template, Markup, request, jsonify
-from .forms import LoginForm
+from flask import render_template, Markup, jsonify
 from app import app
 
 
@@ -7,11 +6,9 @@ from app import app
 @app.route('/index')
 def index():
     nav_items = ['Updates', 'Map', 'Items', 'Location']
-    form = LoginForm(request.form)
     return render_template('index.html',
                            title='1.E.Z.',
-                           nav_items=nav_items,
-                           form=form)
+                           nav_items=nav_items)
 
 
 @app.route('/Updates')
