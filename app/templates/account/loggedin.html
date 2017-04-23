@@ -1,15 +1,17 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ current_user.username }} <span class="caret"></span></a>
-              <ul class="dropdown-menu navbar-inverse navbar-nav">
+              <ul class="dropdown-menu navbar-inverse" id="charlist">
                 <li><a id="logout" href="/logout">Logout</a></li>
                 <li><a id="settings" href="/settings">Settings</a></li>
                 <li role="separator" class="divider"></li>
                 {% if current_user.characters|length >= 1 %}
                 <li class="dropdown-header">Characters</li>
                   {% for char in current_user.characters %}
-                    <li><a href="#">{{ char.name }}</a></li>
+                    <li><a href="#">{{ char.name }}<i href="" class="glyphicon glyphicon-trash"></i></a></li>
                   {% endfor %}
-                {% else %}
+                {% endif %}
+                {% if current_user.characters|length < 3 %}
+                  <li role="separator" class="divider"></li>
                   <li><a id="newchar" href="/newchar">New Character</a></li>
                 {% endif %}
               </ul>

@@ -32,4 +32,5 @@ mail = Mail(app)
 
 from app.views import main
 from app.views import account
+from app.views import characters
 from app.sockets import chat

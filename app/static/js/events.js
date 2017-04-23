@@ -11,15 +11,10 @@
         socket.on('connect', function() {
             socket.emit('loggedin', {data: 'I\'m connected!'});
         });
-        $('#bodyModal').on('submit', '#login-nav', function(e){
+        $('#bodyModal').on('submit', 'form', function(e){
           e.preventDefault();
-          process('post','/applogin',$(this).serialize());
+          process('post', $(this).attr('action'), $(this).serialize());
           $('#bodyModal').modal('hide');
-        });
-        $('#bodyModal').on('submit', '#register-nav', function(e){
-          e.preventDefault();
-          $('#bodyModal').modal('hide');
-          process('post','/register',$(this).serialize());
         });
         $('#bodyModal').on('click', '#register', function(e){
           e.preventDefault();
@@ -29,18 +24,21 @@
           e.preventDefault();
           process('get', "/applogin");
         });
+        $('#navright').on('click', '#newchar', function(e){
+          e.preventDefault();
+          process('get', "/characters/new");
+        });
         $('#navright').on('click', '#logout', function(e){
           e.preventDefault();
           process('get', '/applogout');
         });
-        $('#navright').on('click', '#newchar', function(e){
-          e.preventDefault();
-          //process('get', '/logout');
-          alert('Not Implemented yet');
-        });
         $('#chat').on('submit', 'form', function(e){
           e.preventDefault();
           socket.emit('chat', {data: $(this).find('input[name="chattext"]').val()});
+        });
+        $('ul#charlist > li > a').on('click','i',function(e){
+          e.preventDefault();
+          alert('clicked trash');
         });
         socket.on('chat', function(data){
           $('#chattext').html(data.data);

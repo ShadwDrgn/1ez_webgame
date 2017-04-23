@@ -14,9 +14,8 @@ def index():
 @app.route('/Updates')
 def updates():
     desc = """
-    Login/Register moved to modal<br />
-    Email activation works<br />
-    Registration works<br />
+    Character creation mostly works<br />
+    Locations and Terrains in backend collections
     """
     template = render_template('update.html',
                                summary='Modularize',

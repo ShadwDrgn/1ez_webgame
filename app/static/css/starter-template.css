@@ -43,3 +43,33 @@ body {
 .navbar-color {
     color: #9d9d9d;
 }
+.dropdown-menu.navbar-inverse > li > a {
+  color: #9d9d9d;
+}
+.dropdown-menu.navbar-inverse > li > a:hover,
+.dropdown-menu.navbar-inverse > li > a:focus {
+  color: #fff;
+  background-color: transparent;
+}
+.dropdown-menu.navbar-inverse > .active > a,
+.dropdown-menu.navbar-inverse > .active > a:hover,
+.dropdown-menu.navbar-inverse > .active > a:focus {
+  color: #fff;
+  background-color: #080808;
+}
+.dropdown-menu.navbar-inverse > .disabled > a,
+.dropdown-menu.navbar-inverse > .disabled > a:hover,
+.dropdown-menu.navbar-inverse > .disabled > a:focus {
+  color: #444;
+  background-color: transparent;
+}
+ul#charlist > li > a:hover i {
+display:block !important;
+float:right !important;
+}
+ul#charlist > li > a > i {
+display:none !important;
+}
+ul#charlist > li > a > i.glyphicon-trash {
+padding-left:7%;
+}

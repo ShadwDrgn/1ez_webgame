@@ -1,9 +1,5 @@
 import time
 from .configuration import Configuration
-from werkzeug.security import check_password_hash, generate_password_hash
-from app import lm, app
-from itsdangerous import URLSafeTimedSerializer, BadSignature, BadData
-from pymongo import ReturnDocument
 
 
 class HasAP():
@@ -28,8 +24,3 @@ class LivingEntity(HasAP):
     def __init__(self, ap, hp):
         HasAP.__init__(self, ap)
         self.hp = hp
-
-
-class Character(HasAP):
-    def __init__(self, ap):
-        HasAP.__init__(self, ap)
