@@ -1,17 +1,17 @@
-from app.database import db
+from .config import db
 from flask import Flask
 from flask_socketio import SocketIO
 from werkzeug.contrib.fixers import ProxyFix
 from flask_security import Security, MongoEngineUserDatastore
-from app.game.user import User, Role
+from .account.models.user import User, Role
 from flask_mail import Mail
-from app.views.forms.extendedlogin import ExtendedLoginForm
+from .account.views.form_extendedlogin import ExtendedLoginForm
 
 # Create app
 app = Flask(__name__)
 
 # Load configuration
-app.config.from_object('app.game.configuration.Configuration')
+app.config.from_object('app.config.Configuration')
 
 # Allow for proxy (X-Forwarded-For, etc.)
 app.wsgi_app = ProxyFix(app.wsgi_app)
@@ -30,7 +30,7 @@ db.init_app(app)
 mail = Mail(app)
 
 
-from app.views import main
-from app.views import account
-from app.views import characters
-from app.sockets import chat
+from .views import main
+from .account.views import account
+from .game.views import characters
+from .sockets.views import chat

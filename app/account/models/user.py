@@ -1,5 +1,5 @@
-from app.database import db
-from .character import Character
+from app.config import db
+from app.game.models.character import Character
 from flask_security import UserMixin, RoleMixin
 
 

@@ -1,4 +1,4 @@
-from app.database import db
+from app.config import db
 from .location import Location
 
 

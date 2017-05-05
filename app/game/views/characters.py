@@ -1,8 +1,8 @@
 from flask import render_template, request, jsonify
 from flask_security import current_user
-from app.game.location import Location
-from app.views.forms.new_character import NewCharacter
-from app.game.character import Character
+from app.game.models.location import Location
+from app.game.views.form_new_character import NewCharacter
+from app.game.models.character import Character
 from app import app
 
 

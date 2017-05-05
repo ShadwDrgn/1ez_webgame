@@ -1,5 +1,5 @@
 import time
-from .configuration import Configuration
+from app.config import Configuration
 
 
 class HasAP():

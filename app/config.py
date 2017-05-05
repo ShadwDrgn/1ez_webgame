@@ -1,5 +1,10 @@
 import time
 from pymongo import MongoClient
+from flask_mongoengine import MongoEngine
+
+
+# Create database connection object
+db = MongoEngine()
 
 
 class Configuration():

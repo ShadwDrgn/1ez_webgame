@@ -2,7 +2,7 @@ import json
 from flask import jsonify, request, after_this_request, Markup, render_template
 from app import app
 import flask_security
-from app.views.forms.extendedlogin import ExtendedLoginForm
+from .form_extendedlogin import ExtendedLoginForm
 
 
 @app.route('/applogin', methods=['GET', 'POST'])

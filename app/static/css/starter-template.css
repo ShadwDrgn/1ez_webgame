@@ -73,3 +73,6 @@ display:none !important;
 ul#charlist > li > a > i.glyphicon-trash {
 padding-left:7%;
 }
+svg .over {
+    fill: gray!important;
+}
