@@ -1,6 +1,7 @@
 from app.config import db
 from app.game.models.character import Character
 from flask_security import UserMixin, RoleMixin
+import datetime
 
 
 class Role(db.Document, RoleMixin):
@@ -14,6 +15,13 @@ class User(db.Document, UserMixin):
     password = db.StringField(max_length=255)
     active = db.BooleanField(default=True)
     confirmed_at = db.DateTimeField()
+    creation_date = db.DateTimeField()
+    last_seen = db.DateTimeField()
     roles = db.ListField(db.ReferenceField(Role), default=[])
     characters = db.ListField(db.ReferenceField(Character), default=[])
     username = db.StringField(max_length=255)
+
+    def save(self, *args, **kwargs):
+        if not self.creation_date:
+            self.creation_date = datetime.datetime.now()
+        return super(User, self).save(*args, **kwargs)

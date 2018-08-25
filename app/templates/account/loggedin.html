@@ -7,7 +7,7 @@
                 {% if current_user.characters|length >= 1 %}
                 <li class="dropdown-header">Characters</li>
                   {% for char in current_user.characters %}
-                    <li><a href="#">{{ char.name }}<i href="" class="glyphicon glyphicon-trash"></i></a></li>
+                    <li><a href="#">{{ char.name }}<i href="/characters/delete/{{ char.name }}" class="glyphicon glyphicon-trash"></i></a></li>
                   {% endfor %}
                 {% endif %}
                 {% if current_user.characters|length < 3 %}

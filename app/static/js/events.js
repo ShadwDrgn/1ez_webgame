@@ -35,10 +35,11 @@
         $('#chat').on('submit', 'form', function(e){
           e.preventDefault();
           socket.emit('chat', {data: $(this).find('input[name="chattext"]').val()});
+          $(this).find('input[name="chattext"]').val('');
         });
-        $('ul#charlist > li > a').on('click','i',function(e){
+        $('#navright').on('click','ul#charlist li a i.glyphicon-trash',function(e){
           e.preventDefault();
-          alert('clicked trash');
+          process('get', $(this).attr('href'));
         });
         socket.on('chat', function(data){
           $('#chattext').html(data.data);

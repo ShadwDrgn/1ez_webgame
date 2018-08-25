@@ -1,5 +1,5 @@
 from .config import db
-from flask import Flask
+from flask import Flask, Blueprint
 from flask_socketio import SocketIO
 from werkzeug.contrib.fixers import ProxyFix
 from flask_security import Security, MongoEngineUserDatastore
@@ -29,8 +29,14 @@ db.init_app(app)
 # Initialize mail
 mail = Mail(app)
 
+# Create blueprints
+admin_page = Blueprint('admin_page', __name__,
+                       template_folder='admin_page/templates')
+app.register_blueprint(admin_page, url_prefix='/admin')
+
 
 from .views import main
 from .account.views import account
 from .game.views import characters
 from .sockets.views import chat
+from .admin import admin

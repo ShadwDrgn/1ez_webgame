@@ -13,16 +13,19 @@ def new_character():
         template = render_template('characters/new_character.html', form=form)
         return jsonify({'modal': '#bodyModal', '#bodyModal': template})
     if request.method == "POST":
+        if len(current_user.characters) == 3:
+            template = render_template('alert.html',
+                                       sev='danger',
+                                       title='ERROR!',
+                                       message='Too many characters!')
+            return jsonify({"alert": template})
         form = NewCharacter(request.form)
         if form.validate_on_submit():
-            try:
-                loc = Location.objects.get(x=0, y=0)
-            except Location.DoesNotExist:
-                loc = Location(x=0, y=0).save()
+            loc = list(Location.objects.aggregate({"$sample": {'size': 1}}))[0]['_id']
+            loc = Location.objects.get(id=loc)
             chr = Character(name=form.name.data, location=loc)
             chr.save()
             if len(current_user.characters) < 3:
-                print('>3')
                 current_user.characters.append(chr)
                 current_user.save()
                 template = render_template('account/loggedin.html')
@@ -31,4 +34,20 @@ def new_character():
                                        sev='danger',
                                        title='ERROR!',
                                        message='Character Creation Failed!')
-            return jsonify({"alert": template})
+            ltemplate = render_template('account/loggedin.html')
+            return jsonify({"alert": template, '#navright': ltemplate})
+
+
+@app.route('/characters/delete/<charname>')
+def delete_character(charname):
+    char = Character.objects.get(name=charname)
+    if char.name == charname:
+        current_user.characters.remove(char)
+        current_user.save()
+        char.delete()
+        template = render_template('alert.html',
+                                   sev='success',
+                                   title='SUCCESS!',
+                                   message='Character BALETED!')
+        ltemplate = render_template('account/loggedin.html')
+        return jsonify({"alert": template, '#navright': ltemplate})

@@ -1,10 +1,11 @@
-<div id="chat" class="panel panel-default column two-column">
+<script src="https://www.redblobgames.com/grids/hexagons/codegen/output/lib-functions.js" />
+<div class="panel panel-default column two-column">
 	<div class="panel-heading">
 	    <h3 class="panel-title">Panel title</h3>
 	</div>
 	<div id="map" class="panel-content"></div>
 </div>
-<div id="chat" class="panel panel-default column two-column">
+<div class="panel panel-default column two-column">
 	<div class="panel-heading">
 	    <h3 class="panel-title">Panel title</h3>
 	</div>
@@ -33,9 +34,16 @@ function mout(d) {
      ;
 };
 
+function mclick(d) { 
+  var el = d3.select(this);
+  l = Layout(layout_pointy,Point(25,25),Point(0,0));
+  p = pixel_to_hex(l,Point(d.x,d.y));
+  console.log(qoffset_from_cube(EVEN,hex_round(p)));
+};
+
 //The number of columns and rows of the heatmap
-var MapColumns = 6,
-    MapRows = 6;
+var MapColumns = 7,
+    MapRows = 7;
  
 //The maximum radius the hexagons can have to still fit the screen
 var hexRadius = 25;
@@ -72,6 +80,7 @@ svg.append("g")
     .attr("stroke-width", "1px")
     .style("fill", "white")
     .on("mouseover", mover)
-    .on("mouseout", mout);
+    .on("mouseout", mout)
+    .on("click", mclick);
 
 </script>

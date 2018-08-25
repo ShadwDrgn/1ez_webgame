@@ -10,6 +10,7 @@ def loggedin(json):
 
 @socketio.on('chat')
 def chat(json):
+    json['data'] = json['data'][:100]
     if current_user.is_authenticated:
         json['data'] = current_user.username + ': ' + json['data']
     else:

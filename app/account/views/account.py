@@ -3,6 +3,7 @@ from flask import jsonify, request, after_this_request, Markup, render_template
 from app import app
 import flask_security
 from .form_extendedlogin import ExtendedLoginForm
+import datetime
 
 
 @app.route('/applogin', methods=['GET', 'POST'])
@@ -46,6 +47,8 @@ def register():
         form = ExtendedLoginForm(request.form)
         if form.validate_on_submit():
             user = flask_security.registerable.register_user(**form.to_dict())
+            user.registered_at = datetime.datetime.now()
+            user.save()
             form.user = user
             template = render_template('alert.html',
                                        sev='success',
@@ -54,3 +57,10 @@ def register():
             return jsonify({'alert': template})
         print(json.dumps(form.errors))
         return None
+
+
+@app.before_request
+def last_seen():
+    if flask_security.current_user.is_authenticated:
+        flask_security.current_user.last_seen = datetime.datetime.now()
+        flask_security.current_user.save()
