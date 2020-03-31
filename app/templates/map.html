@@ -38,6 +38,11 @@ function mclick(d) {
   var el = d3.select(this);
   l = Layout(layout_pointy,Point(25,25),Point(0,0));
   p = pixel_to_hex(l,Point(d.x,d.y));
+ oh = Hex(2,3,-5);
+ mh = Hex(10,5,-15);
+off = hex_subtract(mh,oh);
+ console.log(qoffset_from_cube(EVEN,hex_round(hex_add(p,off))));
+console.log(hex_round(hex_add(p,off)));
   console.log(qoffset_from_cube(EVEN,hex_round(p)));
 };
 

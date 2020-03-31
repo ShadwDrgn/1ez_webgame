@@ -14,7 +14,7 @@ app = Flask(__name__)
 app.config.from_object('app.config.Configuration')
 
 # Allow for proxy (X-Forwarded-For, etc.)
-app.wsgi_app = ProxyFix(app.wsgi_app)
+app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1)
 
 # Create socket
 socketio = SocketIO(app)
